@@ -1,6 +1,8 @@
 FROM node:23-alpine AS build
 
 COPY package*.json ./
+RUN npm i -g pnpm@latest
+
 RUN npm i
 COPY . .
 RUN npx nx build dashboard --prod
