@@ -5,7 +5,7 @@ RUN npm i -g pnpm@latest
 
 RUN npm i
 COPY . .
-RUN npx nx build dashboard --prod
+RUN pnpm nx build dashboard --prod
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
