@@ -7,7 +7,6 @@ RUN mpx nx build dashboard --prod
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
-RUN rm-rf ./*
 COPY --from=build /app/dist/apps/dashboard ./
 RUN sed -i '10i \\ttry_files $uri $uri/ /index.html;' /etc/nginx/conf.d/default.conf
 
