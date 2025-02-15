@@ -1,5 +1,6 @@
 # Stage 1: Build the application
 FROM node:23-alpine AS builder
+RUN npm i -g pnpm@latest
 WORKDIR /app
 COPY package*.json ./
 COPY nx.json ./
