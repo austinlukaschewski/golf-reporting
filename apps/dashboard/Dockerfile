@@ -23,7 +23,7 @@ RUN pnpm nx build dashboard --prod
 FROM nginx:alpine
 
 # Step 9: Copy the build output to the NGINX html directory
-COPY --from=build /dist/apps/dashboard /usr/share/nginx/html
+COPY --from=build /app/dist/apps/dashboard /usr/share/nginx/html
 
 # Step 10: Expose port 80 and run NGINX
 EXPOSE 4200
