@@ -26,5 +26,5 @@ FROM nginx:alpine
 COPY --from=build /app/dist/apps/dashboard /usr/share/nginx/html
 
 # Step 10: Expose port 80 and run NGINX
-EXPOSE 4200
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
