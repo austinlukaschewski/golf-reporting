@@ -1,0 +1,9 @@
+services:
+  dashboard:
+    container_name: golf-reporting-dashboard
+    restart: never
+    ports:
+      - "4200:4200"
+    build:
+      context: ./
+      dockerfile: ./apps/dashboard/Dockerfile

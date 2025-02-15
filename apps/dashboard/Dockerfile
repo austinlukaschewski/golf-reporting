@@ -1,0 +1,16 @@
+FROM node:23-alpine AS build
+
+COPY package*.json ./
+RUN npm i
+COPY . .
+RUN mpx nx build dashboard --prod
+
+FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html
+RUN rm-rf ./*
+COPY --from=build /app/dist/apps/dashboard ./
+RUN sed -i '10i \\ttry_files $uri $uri/ /index.html;' /etc/nginx/conf.d/default.conf
+
+EXPOSE 4200
+USER 1000
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
