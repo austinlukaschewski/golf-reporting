@@ -8,7 +8,7 @@ COPY libs ./libs
 RUN npm install
 COPY apps/dashboard ./apps/dashboard
 COPY libs ./libs
-RUN npx nx build your-app
+RUN npx nx build dashboard --prod
 
 # Stage 2: Serve the application with nginx
 FROM nginx:alpine
