@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json nx.json ./
 COPY libs/shared/ui/package.json libs/shared/ui/package.json
 
-RUN npm install
+RUN npm install --no-frozen-lockfile --ignore-scripts
 
 # Step 4: Copy the rest of the application files
 COPY . .
