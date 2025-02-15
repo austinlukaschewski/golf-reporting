@@ -1,29 +1,30 @@
-# Step 1: Use an official Node.js image as the base
+# Step 1: Use a Node.js base image
 FROM node:23 AS build
 
 # Step 2: Set the working directory
 WORKDIR /app
 
-# Step 3: Copy the package.json and nx.json files, and install dependencies
-COPY package.json nx.json ./
-COPY libs/shared/ui/package.json libs/shared/ui/package.json
+# Step 3: Install pnpm globally
+RUN npm install -g pnpm
 
-RUN npm install --no-frozen-lockfile --ignore-scripts
+# Step 4: Copy the package.json, pnpm-lock.yaml and nx.json files
+COPY package.json pnpm-lock.yaml nx.json ./
 
-# Step 4: Copy the rest of the application files
+# Step 5: Install dependencies with pnpm
+RUN pnpm install --frozen-lockfile
+
+# Step 6: Copy the rest of the app files
 COPY . .
 
-# Step 5: Build the app (build the dashboard app)
-RUN npx nx build dashboard --prod
+# Step 7: Build the React app
+RUN pnpm nx build dashboard --prod
 
-# Step 6: Create a new stage for the production image
+# Step 8: Create a production image
 FROM nginx:alpine
 
-# Step 7: Copy the build files from the build stage into the NGINX server directory
-COPY --from=build /app/dist/apps/dashboard /usr/share/nginx/html
+# Step 9: Copy the build output to the NGINX html directory
+COPY --from=build /dist/apps/dashboard /usr/share/nginx/html
 
-# Step 8: Expose port 80 to be able to access the app
+# Step 10: Expose port 80 and run NGINX
 EXPOSE 4200
-
-# Step 9: Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
