@@ -3,7 +3,7 @@ FROM node:23-alpine AS build
 COPY package*.json ./
 RUN npm i
 COPY . .
-RUN mpx nx build dashboard --prod
+RUN npx nx build dashboard --prod
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html

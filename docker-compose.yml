@@ -5,5 +5,5 @@ services:
     ports:
       - "4200:4200"
     build:
-      context: ./
+      context: .
       dockerfile: ./apps/dashboard/Dockerfile
