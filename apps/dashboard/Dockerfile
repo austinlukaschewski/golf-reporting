@@ -6,7 +6,8 @@ COPY nx.json ./
 COPY tsconfig.base.json ./
 COPY libs ./libs
 RUN npm install
-COPY apps/your-app ./apps/your-app
+COPY apps/dashboard ./apps/dashboard
+COPY libs ./libs
 RUN npx nx build your-app
 
 # Stage 2: Serve the application with nginx
