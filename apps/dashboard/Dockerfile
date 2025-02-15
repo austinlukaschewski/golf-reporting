@@ -7,7 +7,6 @@ WORKDIR /app
 # Step 3: Copy the package.json and nx.json files, and install dependencies
 COPY package.json nx.json ./
 COPY libs/shared/ui/package.json libs/shared/ui/package.json
-COPY apps/dashboard/package.json apps/dashboard/package.json
 
 RUN npm install
 
