@@ -7,7 +7,7 @@ COPY nx.json ./
 COPY tsconfig.base.json ./
 COPY apps/dashboard ./apps/dashboard
 COPY libs/shared/ui ./libs/shared/ui
-RUN pnpm i --frozen-lockfile --ignore-scripts
+RUN pnpm i --no-frozen-lockfile --ignore-scripts
 RUN npx nx build dashboard --prod
 
 # Stage 2: Serve the application with nginx
