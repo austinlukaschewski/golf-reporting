@@ -4,10 +4,10 @@ WORKDIR /app
 COPY package*.json ./
 COPY nx.json ./
 COPY tsconfig.base.json ./
-COPY libs ./libs
-RUN npm install
+COPY . .
 COPY apps/dashboard ./apps/dashboard
 COPY libs/shared/ui ./libs/shared/ui
+RUN npm install
 RUN npx nx build dashboard --prod
 
 # Stage 2: Serve the application with nginx
